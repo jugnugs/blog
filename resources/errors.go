@@ -11,3 +11,7 @@ func GetInternalServerErrorMessage() string {
 func GetNotFoundErrorMessage() string {
 	return "Could not find the requested resource."
 }
+
+func GetNotAuthorizedMessage() string {
+	return "Authorization to access the requested resource failed."
+}

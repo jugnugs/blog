@@ -2,6 +2,7 @@ package blogs
 
 import (
 	"database/sql"
+	"gin/middleware"
 	"gin/modules/blogs/endpoints"
 	"gin/modules/blogs/repository"
 	"log"
@@ -13,6 +14,7 @@ import (
 
 func InitializeModule(server *gin.Engine) {
 	dbString := os.Getenv("CONNECTION_STRING")
+	apiKey := os.Getenv("API_KEY")
 
 	// initialize the connection pool
 	db, err := sql.Open("postgres", dbString)
@@ -26,6 +28,6 @@ func InitializeModule(server *gin.Engine) {
 	{
 		blogRoutes.GET("", endpoints.GetBlogs(blogRepository))
 		blogRoutes.GET("/:id", endpoints.FetchBlog(blogRepository))
-		blogRoutes.POST("", endpoints.PostBlog(blogRepository))
+		blogRoutes.POST("", middleware.AuthorizeWithAPIKey(apiKey), endpoints.PostBlog(blogRepository))
 	}
 }

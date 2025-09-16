@@ -1,6 +1,7 @@
 package main
 
 import (
+	"gin/middleware"
 	"gin/modules/blogs"
 	"log"
 
@@ -10,6 +11,8 @@ import (
 
 func main() {
 	r := gin.Default()
+	r.SetTrustedProxies(nil)
+	r.Use(middleware.AddCors())
 
 	err := godotenv.Load()
 	if err != nil {

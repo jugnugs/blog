@@ -1,68 +1,79 @@
 import renderHomePage from "./pages/home.js";
 import renderAboutPage from "./pages/about.js";
-import renderBlogPage from "./pages/blogpage.js";
+import BlogPage from "./pages/blogpage.js";
 
 const routes = {
-    "/": { title: "blog home", content: renderHomePage},
-    "/about": { title: "about", content: renderAboutPage},
-    "/blog": { title: "blog", content: renderBlogPage}
+  "/": { title: "blog home", content: renderHomePage },
+  "/about": { title: "about", content: renderAboutPage },
+  "/notfound": { title: "404", content: () => "page not found" },
 };
 
-class Router {
-    constructor(routes) {
-        this.routes = routes;
-        this.handleRouteChange = this.handleRouteChange.bind(this);
-    }
-
-    handleRouteChange() {
-        const path = this.getPathFromUrl();
-        console.log(path)
-        const route = this.resolveRouteFromPath(path);
-        if (route) {
-            switch (path) {
-                case "/blog":
-                    const subpath = "test"
-                    document.getElementById("app").innerHTML = route.content(subpath);
-                    break;
-                default:
-                    document.getElementById("app").innerHTML = route.content();
-            }
-            document.title = route.title;
-        } else {
-            document.getElementById("app").innerHTML = "page not found";
-            document.title = "404";
-        }
-    }
-
-    getPathFromUrl() {
-        const path = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
-        if (!path) return "/";
-        return "/".concat(path);
-    }
-
-    resolveRouteFromPath(path) {
-        const route = this.routes[path];
-        if (!route) return routes["/"];
-        return route;
-    }
+/**
+ * Updates the contents of the app div with the results of renderPage.
+ * @param {function(*): string} renderPage
+ */
+function updateApp(renderPage) {
+  document.getElementById("app").innerHTML = renderPage();
 }
 
-const router = new Router(routes)
+class Router {
+  constructor(routes) {
+    this.routes = routes;
+    this.handleRouteChange = this.handleRouteChange.bind(this);
+  }
+
+  handleRouteChange() {
+    const path = this.getPathFromUrl();
+    const route = this.resolveRouteFromPath(path);
+    if (route) {
+      updateApp(route.content);
+      document.title = route.title;
+    } else if (/^\/blog\/[a-zA-Z0-9-]+/.test(path)) {
+      const subpath = path.split("/")[2];
+      BlogPage.initialize(subpath).then(
+        (blogPage) => {
+          this.routes[path] = {
+            title: blogPage.blog.title,
+            content: () => blogPage.renderBlogPage(),
+          };
+          this.handleRouteChange();
+        },
+        () => {
+          updateApp(this.routes["/notfound"].content);
+          document.title = "404";
+        }
+      );
+    } else {
+      updateApp(this.routes["/notfound"].content);
+      document.title = "404";
+    }
+  }
+
+  getPathFromUrl() {
+    return window.location.pathname || "/";
+  }
+
+  resolveRouteFromPath(path) {
+    return this.routes[path];
+  }
+}
+
+const router = new Router(routes);
 
 window.addEventListener("DOMContentLoaded", () => {
-    document.addEventListener("click", e => {
-        const target = e.target;
-        // Check if the clicked element is an anchor with data-link
-        if (target instanceof HTMLAnchorElement && target.matches("[data-link]")) {
-            e.preventDefault();
-            history.pushState(null, "", target.href);
-            router.handleRouteChange(); 
-        }
-    });
+  document.addEventListener("click", (e) => {
+    const target = e.target;
+    // Check if the clicked element is an anchor with data-link
+    if (target instanceof HTMLAnchorElement && target.matches("[data-link]")) {
+      e.preventDefault();
+      history.pushState(null, "", target.href);
+      router.handleRouteChange();
+    }
+  });
 
-    window.addEventListener("popstate", (e) => {
-        router.handleRouteChange();
-    })
-
+  window.addEventListener("popstate", () => {
     router.handleRouteChange();
+  });
+
+  router.handleRouteChange();
 });

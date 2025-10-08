@@ -9,11 +9,14 @@ const routes = {
 };
 
 /**
- * Updates the contents of the app div with the results of renderPage.
+ * Updates the contents of the app div with the results of renderPage,
+ * and change the title.
  * @param {function(*): string} renderPage
+ * @param {string} title
  */
-function updateApp(renderPage) {
+function updateApp(renderPage, title) {
   document.getElementById("app").innerHTML = renderPage();
+  document.title = title;
 }
 
 class Router {
@@ -26,8 +29,7 @@ class Router {
     const path = this.getPathFromUrl();
     const route = this.resolveRouteFromPath(path);
     if (route) {
-      updateApp(route.content);
-      document.title = route.title;
+      updateApp(route.content, route.title);
     } else if (/^\/blog\/[a-zA-Z0-9-]+/.test(path)) {
       const subpath = path.split("/")[2];
       BlogPage.initialize(subpath).then(
@@ -38,14 +40,15 @@ class Router {
           };
           this.handleRouteChange();
         },
-        () => {
-          updateApp(this.routes["/notfound"].content);
-          document.title = "404";
+        (errorMessage) => {
+          console.log(errorMessage);
+          updateApp(this.routes["/notfound"].content, "404");
+          window.history.replaceState(null, "", "/notfound");
         }
       );
     } else {
-      updateApp(this.routes["/notfound"].content);
-      document.title = "404";
+      updateApp(this.routes["/notfound"].content, "404");
+      window.history.replaceState(null, "", "/notfound");
     }
   }
 

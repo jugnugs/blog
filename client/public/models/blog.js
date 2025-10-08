@@ -25,25 +25,21 @@ class BlogModel {
    */
   static async fetchNewBlog(blogId) {
     const url = `http://localhost:8080/blog/${blogId}`;
-    try {
-      const res = await fetch(url);
-      if (!res.ok) {
-        throw new Error(`Failed to fetch blog data: status ${res.status}`);
-      }
-      const data = await res.json();
-      const newBlog = new BlogModel({
-        id: data["Id"],
-        title: data["Title"],
-        subtitle: data["Subtitle"],
-        dateCreated: data["DateCreated"],
-        dateUpdated: data["DateUpdated"],
-        keywords: data["Keywords"],
-        content: data["Content"],
-      });
-      return newBlog;
-    } catch (err) {
-      console.log(err.message);
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`Failed to fetch blog data: status ${res.status}`);
     }
+    const data = await res.json();
+    const newBlog = new BlogModel({
+      id: data["Id"],
+      title: data["Title"],
+      subtitle: data["Subtitle"],
+      dateCreated: data["DateCreated"],
+      dateUpdated: data["DateUpdated"],
+      keywords: data["Keywords"],
+      content: data["Content"],
+    });
+    return newBlog;
   }
 
   /**

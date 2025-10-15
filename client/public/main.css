@@ -1,0 +1,52 @@
+:root {
+  --main-bg-color: #1B1F3A;
+  --main-text-color: #D7DADC;
+  --nav-color: #FFBC6B;
+  --main-title-color: #FFA480;
+  --link-color: #72C6FF;
+}
+
+body {
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+main {
+  width: 30vw;
+}
+
+main a:link, main a:visited {
+  color: var(--link-color);
+}
+
+nav a:link, nav a:visited {
+  color: var(--nav-color);
+  text-decoration: none;
+}
+
+article {
+  width: 100%;
+}
+
+header {
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--main-text-color);
+}
+
+h1 {
+  margin: 0.5rem;
+  text-align: center;
+}

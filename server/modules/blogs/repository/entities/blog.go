@@ -3,7 +3,7 @@ package entities
 import "time"
 
 type Blog struct {
-	BlogId      string
+	BlogId      int
 	Title       string
 	Subtitle    string
 	Slug        string

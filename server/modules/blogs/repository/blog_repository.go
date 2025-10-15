@@ -11,8 +11,8 @@ import (
 type (
 	BlogRepository interface {
 		GetBlogs() ([]entities.Blog, error)
-		FetchBlog(blogId string) (*entities.Blog, error)
-		CreateBlog(blog *entities.Blog) (*string, error)
+		FetchBlog(blogId int) (*entities.Blog, error)
+		CreateBlog(blog *entities.Blog) (*int, error)
 	}
 
 	blogRepository struct {
@@ -58,7 +58,7 @@ func (br *blogRepository) GetBlogs() ([]entities.Blog, error) {
 	return blogs, nil
 }
 
-func (br *blogRepository) FetchBlog(blogId string) (*entities.Blog, error) {
+func (br *blogRepository) FetchBlog(blogId int) (*entities.Blog, error) {
 	row := br.db.QueryRow("SELECT * FROM public.blog_posts WHERE blogid = $1", blogId)
 
 	var blog entities.Blog
@@ -76,15 +76,15 @@ func (br *blogRepository) FetchBlog(blogId string) (*entities.Blog, error) {
 		if err == sql.ErrNoRows {
 			return &blog, DataNotFoundError{Msg: "Blog post data could not be found"}
 		}
-		return &blog, fmt.Errorf("blogPost %s: could not be parsed", blogId)
+		return &blog, fmt.Errorf("blogPost %d: could not be parsed", blogId)
 	}
 
 	return &blog, nil
 }
 
-func (br *blogRepository) CreateBlog(newBlog *entities.Blog) (*string, error) {
-	_, err := br.db.Exec("INSERT INTO blog_posts (blogId, title, subtitle, dateCreated, dateUpdated, keywords, content, slug) VALUES ($1, $2, $3, $4, $5, $6, $7)", newBlog.BlogId, newBlog.Title, newBlog.Subtitle, newBlog.DateCreated, newBlog.DateUpdated, pq.Array(newBlog.Keywords), newBlog.Content, newBlog.Slug)
-	if err != nil {
+func (br *blogRepository) CreateBlog(newBlog *entities.Blog) (*int, error) {
+	row := br.db.QueryRow("INSERT INTO blog_posts (title, subtitle, dateCreated, dateUpdated, keywords, content, slug) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING blogid", newBlog.Title, newBlog.Subtitle, newBlog.DateCreated, newBlog.DateUpdated, pq.Array(newBlog.Keywords), newBlog.Content, newBlog.Slug)
+	if err := row.Scan(&newBlog.BlogId); err != nil {
 		return nil, err
 	}
 	return &newBlog.BlogId, nil

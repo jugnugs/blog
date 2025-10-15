@@ -9,7 +9,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
 )
 
 func PostBlog(blogRepository repository.BlogRepository) func(*gin.Context) {
@@ -22,7 +21,6 @@ func PostBlog(blogRepository repository.BlogRepository) func(*gin.Context) {
 		}
 
 		blogEntity := &entities.Blog{
-			BlogId:      uuid.New().String(),
 			Title:       req.Title,
 			Subtitle:    req.Subtitle,
 			Slug:        req.Slug,

@@ -22,7 +22,7 @@ func FetchBlog(blogRepository repository.BlogRepository) func(*gin.Context) {
 
 		blogItem, err := blogRepository.FetchBlog(req.Id)
 		if err != nil {
-			log.Printf("Error fetching the blog post of id %s: %v", req.Id, err.Error())
+			log.Printf("Error fetching the blog post of id %d: %v", req.Id, err.Error())
 			switch err.(type) {
 			case repository.DataNotFoundError:
 				c.JSON(http.StatusNotFound, gin.H{"error": resources.GetNotFoundErrorMessage()})

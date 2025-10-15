@@ -4,11 +4,11 @@ import "time"
 
 type (
 	FetchBlogRequest struct {
-		Id string `uri:"id" binding:"required"`
+		Id int `uri:"id" binding:"required"`
 	}
 
 	FetchBlogsResponse struct {
-		Id          string
+		Id          int
 		Title       string
 		Subtitle    string
 		Slug        string
@@ -33,6 +33,6 @@ type (
 	}
 
 	PostBlogResponse struct {
-		Id string
+		Id int
 	}
 )

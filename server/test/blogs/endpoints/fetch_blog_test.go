@@ -13,7 +13,7 @@ func TestFetchSuccess(t *testing.T) {
 	router := blogs.SetupTest()
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/blog/2222222", nil)
+	req, _ := http.NewRequest("GET", "/blog/2", nil)
 	router.ServeHTTP(w, req)
 
 	assert.Equal(t, http.StatusOK, w.Code)
@@ -33,7 +33,7 @@ func TestFetchServerError(t *testing.T) {
 	router := blogs.SetupErrorTest()
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/blog/2222222", nil)
+	req, _ := http.NewRequest("GET", "/blog/2", nil)
 	router.ServeHTTP(w, req)
 
 	assert.Equal(t, http.StatusInternalServerError, w.Code)

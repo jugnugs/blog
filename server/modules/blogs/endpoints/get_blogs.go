@@ -25,6 +25,7 @@ func GetBlogs(blogRepository repository.BlogRepository) func(*gin.Context) {
 				Id:          blogItem.BlogId,
 				Title:       blogItem.Title,
 				Subtitle:    blogItem.Subtitle,
+				Slug:        blogItem.Slug,
 				DateCreated: blogItem.DateCreated,
 				DateUpdated: blogItem.DateUpdated,
 				Keywords:    blogItem.Keywords,

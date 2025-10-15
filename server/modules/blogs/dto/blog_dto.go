@@ -11,6 +11,7 @@ type (
 		Id          string
 		Title       string
 		Subtitle    string
+		Slug        string
 		DateCreated time.Time
 		DateUpdated time.Time
 		Keywords    []string
@@ -24,6 +25,7 @@ type (
 	PostBlogRequest struct {
 		Title       string
 		Subtitle    string
+		Slug        string
 		DateCreated time.Time
 		DateUpdated time.Time
 		Keywords    []string

@@ -45,6 +45,7 @@ func (br *blogRepository) GetBlogs() ([]entities.Blog, error) {
 			&blog.DateUpdated,
 			pq.Array(&blog.Keywords),
 			&blog.Content,
+			&blog.Slug,
 		)
 		if err != nil {
 			return nil, err
@@ -70,6 +71,7 @@ func (br *blogRepository) FetchBlog(blogId string) (*entities.Blog, error) {
 		&blog.DateUpdated,
 		pq.Array(&blog.Keywords),
 		&blog.Content,
+		&blog.Slug,
 	); err != nil {
 		if err == sql.ErrNoRows {
 			return &blog, DataNotFoundError{Msg: "Blog post data could not be found"}
@@ -81,7 +83,7 @@ func (br *blogRepository) FetchBlog(blogId string) (*entities.Blog, error) {
 }
 
 func (br *blogRepository) CreateBlog(newBlog *entities.Blog) (*string, error) {
-	_, err := br.db.Exec("INSERT INTO blog_posts (blogId, title, subtitle, dateCreated, dateUpdated, keywords, content) VALUES ($1, $2, $3, $4, $5, $6, $7)", newBlog.BlogId, newBlog.Title, newBlog.Subtitle, newBlog.DateCreated, newBlog.DateUpdated, pq.Array(newBlog.Keywords), newBlog.Content)
+	_, err := br.db.Exec("INSERT INTO blog_posts (blogId, title, subtitle, dateCreated, dateUpdated, keywords, content, slug) VALUES ($1, $2, $3, $4, $5, $6, $7)", newBlog.BlogId, newBlog.Title, newBlog.Subtitle, newBlog.DateCreated, newBlog.DateUpdated, pq.Array(newBlog.Keywords), newBlog.Content, newBlog.Slug)
 	if err != nil {
 		return nil, err
 	}

@@ -25,6 +25,7 @@ func PostBlog(blogRepository repository.BlogRepository) func(*gin.Context) {
 			BlogId:      uuid.New().String(),
 			Title:       req.Title,
 			Subtitle:    req.Subtitle,
+			Slug:        req.Slug,
 			DateCreated: req.DateCreated,
 			DateUpdated: req.DateUpdated,
 			Keywords:    req.Keywords,

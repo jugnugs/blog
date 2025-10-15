@@ -1,4 +1,4 @@
-const data = ["testid", "fe0c4f55-f754-40c8-8b34-c9145d51a953", "orange"];
+const data = ["1-first-journey-go", "2-second-test", "3-test-slug"];
 
 const renderList = () => {
   return data

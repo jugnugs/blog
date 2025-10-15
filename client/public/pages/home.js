@@ -1,7 +1,7 @@
 import bloglist from "../views/bloglist.js";
 
 const renderHomePage = () => {
-  return `<h2>Home Page</h2>
+  return `<h1>blog list</h1>
 ${bloglist}`;
 };
 

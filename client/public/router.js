@@ -1,11 +1,12 @@
 import renderHomePage from "./pages/home.js";
 import renderAboutPage from "./pages/about.js";
+import renderNotFoundPage from "./pages/404.js";
 import BlogPage from "./pages/blogpage.js";
 
 const routes = {
-  "/": { title: "blog home", content: renderHomePage },
-  "/about": { title: "about", content: renderAboutPage },
-  "/notfound": { title: "404", content: () => "page not found" },
+  "/": { title: "blog home", renderContent: renderHomePage },
+  "/about": { title: "about", renderContent: renderAboutPage },
+  "/notfound": { title: "404", renderContent: renderNotFoundPage },
 };
 
 /**
@@ -26,28 +27,36 @@ class Router {
   }
 
   handleRouteChange() {
-    const path = this.getPathFromUrl();
+    let path = this.getPathFromUrl();
     const route = this.resolveRouteFromPath(path);
     if (route) {
-      updateApp(route.content, route.title);
+      updateApp(route.renderContent, route.title);
     } else if (/^\/blog\/[a-zA-Z0-9-]+/.test(path)) {
       const subpath = path.split("/")[2];
-      BlogPage.initialize(subpath).then(
+      const blogId = subpath.split("-")[0];
+      const slug = subpath.slice(subpath.indexOf("-") + 1);
+      BlogPage.initialize(blogId).then(
         (blogPage) => {
+          if (blogPage.blog.slug !== slug) {
+            path = `/blog/${blogId}-${blogPage.blog.slug}`;
+            history.replaceState(null, "", path);
+          }
+
           this.routes[path] = {
             title: blogPage.blog.title,
-            content: () => blogPage.renderBlogPage(),
+            renderContent: () => blogPage.renderBlogPage(),
           };
+
           this.handleRouteChange();
         },
         (errorMessage) => {
           console.log(errorMessage);
-          updateApp(this.routes["/notfound"].content, "404");
+          updateApp(this.routes["/notfound"].renderContent, "404");
           window.history.replaceState(null, "", "/notfound");
         }
       );
     } else {
-      updateApp(this.routes["/notfound"].content, "404");
+      updateApp(this.routes["/notfound"].renderContent, "404");
       window.history.replaceState(null, "", "/notfound");
     }
   }

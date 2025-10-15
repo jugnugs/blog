@@ -5,6 +5,7 @@ class BlogModel {
    * @property {string} id
    * @property {string} title
    * @property {string} subtitle
+   * @property {string} slug
    * @property {string} dateCreated
    * @property {string} dateUpdated
    * @property {string[]} keywords
@@ -34,6 +35,7 @@ class BlogModel {
       id: data["Id"],
       title: data["Title"],
       subtitle: data["Subtitle"],
+      slug: data["Slug"],
       dateCreated: data["DateCreated"],
       dateUpdated: data["DateUpdated"],
       keywords: data["Keywords"],
@@ -51,6 +53,7 @@ class BlogModel {
     this.id = newBlog.id;
     this.title = newBlog.title;
     this.subtitle = newBlog.subtitle;
+    this.slug = newBlog.slug;
     this.dateCreated = newBlog.dateCreated;
     this.dateUpdated = newBlog.dateUpdated;
     this.keywords = newBlog.keywords;

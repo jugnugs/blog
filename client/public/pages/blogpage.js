@@ -1,3 +1,4 @@
+import renderArticleHeader from "../components/article_header.js";
 import { BlogModel } from "../models/blog.js";
 
 /** Class representing the contents of a blog page. */
@@ -35,12 +36,14 @@ class BlogPage {
    * @returns HTML for the blog page
    */
   renderBlogPage() {
-    return `<h1>${this.blog.title}</h1> 
+    return `<article>
+            ${renderArticleHeader(this.blog.title, this.blog.subtitle, this.blog.dateCreated)}
             ${
               // @ts-ignore
               // eslint-disable-next-line no-undef
               DOMPurify.sanitize(marked.parse(this.blog.content))
-            }`;
+            }
+            </article>`;
   }
 }
 

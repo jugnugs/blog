@@ -1,11 +1,13 @@
 import BlogApiClient from "../api/blog.js";
-import renderArticleHeader from "../components/article_header.js";
+import buildArticleHeader from "../components/article_header.js";
 
 /** Class representing the contents of a blog page. */
 class BlogPage {
+  static blogApiClient = new BlogApiClient();
+
   /**
    * Constructor for a blog page, do not call directly.
-   * Use initialize method.
+   * Use createBlogPage method.
    * @param {string} blogId
    */
   constructor(blogId) {
@@ -19,32 +21,31 @@ class BlogPage {
    * @param {string} blogId
    * @returns
    */
-  static async initialize(blogId) {
+  static async createBlogPage(blogId) {
     const newPage = new BlogPage(blogId);
-    await newPage.updatePageContents();
+    newPage.blog = await BlogPage.blogApiClient.fetchBlog(newPage.blogId);
     return newPage;
   }
 
   /**
-   * Fetch the blog page contents using the stored blogId.
+   * @returns Root element of constructed Page DOM.
    */
-  async updatePageContents() {
-    const blogApiClient = new BlogApiClient();
-    this.blog = await blogApiClient.fetchBlog(this.blogId);
-  }
+  buildPageDOM() {
+    const container = document.createElement("article");
+    const articleHeader = buildArticleHeader(
+      this.blog.title,
+      this.blog.subtitle,
+      this.blog.dateCreated
+    );
+    container.appendChild(articleHeader);
 
-  /**
-   * @returns HTML for the blog page
-   */
-  renderBlogPage() {
-    return `<article>
-            ${renderArticleHeader(this.blog.title, this.blog.subtitle, this.blog.dateCreated)}
-            ${
-              // @ts-ignore
-              // eslint-disable-next-line no-undef
-              DOMPurify.sanitize(marked.parse(this.blog.content))
-            }
-            </article>`;
+    const articleBody = document.createElement("div");
+    // @ts-ignore
+    // eslint-disable-next-line no-undef
+    articleBody.innerHTML = DOMPurify.sanitize(marked.parse(this.blog.content));
+    container.appendChild(articleBody);
+
+    return container;
   }
 }
 

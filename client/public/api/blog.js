@@ -29,6 +29,31 @@ class BlogApiClient {
       });
     });
   }
+
+  /**
+   * Fetch the blog from the server and create a new BlogModel.
+   * @param {string} blogId
+   * @returns BlogModel
+   */
+  async fetchBlog(blogId) {
+    const url = `${this.BASE_URL}/blog/${blogId}`;
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`Failed to fetch blog data: status ${res.status}`);
+    }
+    const data = await res.json();
+    const newBlog = new BlogModel({
+      id: data["Id"],
+      title: data["Title"],
+      subtitle: data["Subtitle"],
+      slug: data["Slug"],
+      dateCreated: data["DateCreated"],
+      dateUpdated: data["DateUpdated"],
+      keywords: data["Keywords"],
+      content: data["Content"],
+    });
+    return newBlog;
+  }
 }
 
 export default BlogApiClient;

@@ -1,5 +1,5 @@
+import BlogApiClient from "../api/blog.js";
 import renderArticleHeader from "../components/article_header.js";
-import { BlogModel } from "../models/blog.js";
 
 /** Class representing the contents of a blog page. */
 class BlogPage {
@@ -29,7 +29,8 @@ class BlogPage {
    * Fetch the blog page contents using the stored blogId.
    */
   async updatePageContents() {
-    this.blog = await BlogModel.fetchNewBlog(this.blogId);
+    const blogApiClient = new BlogApiClient();
+    this.blog = await blogApiClient.fetchBlog(this.blogId);
   }
 
   /**

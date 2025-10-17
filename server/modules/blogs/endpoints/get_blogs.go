@@ -33,8 +33,6 @@ func GetBlogs(blogRepository repository.BlogRepository) func(*gin.Context) {
 			}
 		}
 
-		c.JSON(http.StatusOK, dto.GetBlogsResponse{
-			Data: responseData,
-		})
+		c.JSON(http.StatusOK, responseData)
 	}
 }

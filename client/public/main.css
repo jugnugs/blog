@@ -50,3 +50,15 @@ h1 {
   margin: 0.5rem;
   text-align: center;
 }
+
+.blog-card {
+  border: var(--main-text-color) 1px solid;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

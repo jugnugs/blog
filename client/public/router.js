@@ -15,8 +15,8 @@ const routes = {
  * @param {function(*): string} renderPage
  * @param {string} title
  */
-function updateApp(renderPage, title) {
-  document.getElementById("app").innerHTML = renderPage();
+async function updateApp(renderPage, title) {
+  document.getElementById("app").innerHTML = await renderPage();
   document.title = title;
 }
 

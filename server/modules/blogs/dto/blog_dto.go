@@ -18,10 +18,6 @@ type (
 		Content     string
 	}
 
-	GetBlogsResponse struct {
-		Data []FetchBlogsResponse
-	}
-
 	PostBlogRequest struct {
 		Title       string
 		Subtitle    string

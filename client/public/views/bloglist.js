@@ -1,11 +1,23 @@
-const data = ["1-first-journey-go", "2-second-test", "3-test-slug"];
+import BlogApiClient from "../api/blog.js";
+import renderBlogCard from "../components/blog_card.js";
 
-const renderList = () => {
-  return data
-    .map((d) => `<a href="/blog/${d}" data-link>${d}</h3><br>`)
-    .join("");
+const renderBlogList = async () => {
+  const blogApiClient = new BlogApiClient();
+  const data = await blogApiClient.fetchBlogList();
+
+  return `<div class="blog-list">
+    ${data
+      .map((d) =>
+        renderBlogCard(
+          d.title,
+          d.dateCreated,
+          d.subtitle,
+          d.keywords,
+          `${d.id}-${d.slug}"`
+        )
+      )
+      .join("")}
+    </div>`;
 };
 
-const html = `${renderList()}`;
-
-export default html;
+export default renderBlogList;

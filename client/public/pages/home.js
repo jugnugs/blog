@@ -1,8 +1,9 @@
-import bloglist from "../views/bloglist.js";
+import renderBlogList from "../views/bloglist.js";
 
-const renderHomePage = () => {
+const renderHomePage = async () => {
+  const blogList = await renderBlogList();
   return `<h1>blog list</h1>
-${bloglist}`;
+    ${blogList}`;
 };
 
 export default renderHomePage;

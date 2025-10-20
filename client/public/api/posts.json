@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "title": "Why Blog? Why Create Anything?",
+    "subtitle": "ramblings about self-expression",
+    "dateCreated": "2025-10-17T00:00:00.000Z",
+    "tags": [
+      "writing",
+      "creativity"
+    ],
+    "slug": "why-blog",
+    "content": "\n## Introduction\n\nI have never tried to publicize my thoughts in any way. Partially because I believe I don't have anything important to say that I need the world to pay attention to, but maybe even more so this: _I am afraid_. There's something scary about sharing a piece of yourself you would not normally share, especially to an unknown audience that is the Internet. What will people think if I say this? Maybe I have the wrong opinion about this to begin with, I need to be careful before I post anything. What can I do to convey this in the cleanest way possible to **_avoid conflict and confusion_**?\n\nIt's an impossible goal. I cannot predict who will see and read my words. I can't predict how they will feel and react to those words. No matter how much I can try to control the output, it will never please everyone. That's just how it works. So I write for myself, and maybe a small audience that can resonate, but I don't have high expectations that anyone can. Not because I think I am special, but I want to free myself from the concept of expectations to begin with: what I feel and write is what I feel and write, that's it. It's by being able to do this that I am able to get a grasp, if only a small sliver, of the individual that is me.\n"
+  },
+  {
+    "id": 2,
+    "title": "Cooking for Life",
+    "subtitle": "ramblings about the role of food and cooking in my life",
+    "dateCreated": "2025-10-20T00:00:00.000Z",
+    "tags": [
+      "cooking"
+    ],
+    "slug": "cooking-life",
+    "content": "\n## A Food Journey\n\nI started cooking at home way more frequently as a way to reduce spending on food. Some days, especially at the beginning of that journey, I felt excited thinking about new dishes to try making. Other days, I found the very idea of cutting up ingredients exhausting. Motivation is variable, so my motivation to cook is variable too. But no matter what, the necessity to eat something is always present.\n"
+  },
+  {
+    "id": 3,
+    "title": "What is a Successful Life?",
+    "subtitle": "and is that even the right question?",
+    "dateCreated": "2025-10-22T00:00:00.000Z",
+    "tags": [
+      "life",
+      "purpose"
+    ],
+    "slug": "successful-life",
+    "content": "\n## The Definition of Success\n"
+  },
+  {
+    "id": 4,
+    "title": "Programming an SPA with pure JS",
+    "subtitle": "going back to the foundations",
+    "dateCreated": "2025-10-25T00:00:00.000Z",
+    "tags": [
+      "programming",
+      "webdev",
+      "frontend"
+    ],
+    "slug": "spa-purejs",
+    "content": "\n## Introduction\n\nInstead of writing JSX in **React**, I challenged myself to write a bunch of this:\n\n```javascript\nconst selector = document.createElement(\"div\");\n```\n"
+  },
+  {
+    "id": 5,
+    "title": "Do we need a Life Purpose?",
+    "subtitle": "is it overrated?",
+    "dateCreated": "2025-10-27T00:00:00.000Z",
+    "tags": [
+      "life",
+      "purpose"
+    ],
+    "slug": "life-purpose",
+    "content": "\n## The Futility about thinking about Purpose\n"
+  },
+  {
+    "id": 6,
+    "title": "My Relationship with Money",
+    "subtitle": "the most central necessary evil?",
+    "dateCreated": "2025-10-31T00:00:00.000Z",
+    "tags": [
+      "money"
+    ],
+    "slug": "relationship-money",
+    "content": "\n## Money: More about the Immaterial than the Material\n"
+  }
+]

@@ -1,14 +1,16 @@
 import BlogList from "../views/bloglist.js";
 
 class HomePage {
-  constructor() {
+  constructor(blogRepository) {
     this.headerContents = "blog list";
     this.blogList = new BlogList();
+    this.blogRepository = blogRepository;
   }
 
-  static async createHomePage() {
-    const homePage = new HomePage();
-    homePage.blogList = await BlogList.createBlogList();
+  static async createHomePage(blogRepository) {
+    const homePage = new HomePage(blogRepository);
+    const blogList = await homePage.blogRepository.fetchPaginatedBlogPosts(1);
+    homePage.blogList = new BlogList(blogList);
     return homePage;
   }
 

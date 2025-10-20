@@ -1,14 +1,11 @@
-import BlogApiClient from "../api/blog.js";
 import buildArticleHeader from "../components/article_header.js";
 
 /** Class representing the contents of a blog page. */
 class BlogPage {
-  static blogApiClient = new BlogApiClient();
-
   /**
    * Constructor for a blog page, do not call directly.
    * Use createBlogPage method.
-   * @param {string} blogId
+   * @param {number} blogId
    */
   constructor(blogId) {
     this.blogId = blogId;
@@ -18,12 +15,12 @@ class BlogPage {
   /**
    * Public constructor of BlogPage.
    * Fetches blog contents after creation.
-   * @param {string} blogId
+   * @param {number} blogId
    * @returns
    */
-  static async createBlogPage(blogId) {
+  static async createBlogPage(blogId, blogRepository) {
     const newPage = new BlogPage(blogId);
-    newPage.blog = await BlogPage.blogApiClient.fetchBlog(newPage.blogId);
+    newPage.blog = await blogRepository.fetchBlog(newPage.blogId);
     return newPage;
   }
 

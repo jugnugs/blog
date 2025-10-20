@@ -1,59 +1,63 @@
 import { BlogModel } from "../models/blog.js";
 
-class BlogApiClient {
+class BlogRepository {
   constructor() {
-    this.BASE_URL = `http://localhost:8080`;
+    this.blogCache = [];
+    this.POSTS_PER_PAGE = 5;
   }
 
   /**
-   * Fetch list of blogs
-   * @returns list of BlogModels
-   */
-  async fetchBlogList() {
-    const url = `${this.BASE_URL}/blog`;
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error(`Failed to fetch blog list data: status ${res.status}`);
-    }
-    const data = await res.json();
-    return data.map((item) => {
-      return new BlogModel({
-        id: item["Id"],
-        title: item["Title"],
-        subtitle: item["Subtitle"],
-        slug: item["Slug"],
-        dateCreated: item["DateCreated"],
-        dateUpdated: item["DateUpdated"],
-        keywords: item["Keywords"],
-        content: item["Content"],
-      });
-    });
-  }
-
-  /**
-   * Fetch the blog from the server and create a new BlogModel.
-   * @param {string} blogId
+   * Fetch the blog contents and create a new BlogModel.
+   * @param {number} blogId
    * @returns BlogModel
    */
   async fetchBlog(blogId) {
-    const url = `${this.BASE_URL}/blog/${blogId}`;
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error(`Failed to fetch blog data: status ${res.status}`);
+    if (this.blogCache.length === 0) {
+      await this.fetchPaginatedBlogPosts(1);
     }
-    const data = await res.json();
-    const newBlog = new BlogModel({
-      id: data["Id"],
-      title: data["Title"],
-      subtitle: data["Subtitle"],
-      slug: data["Slug"],
-      dateCreated: data["DateCreated"],
-      dateUpdated: data["DateUpdated"],
-      keywords: data["Keywords"],
-      content: data["Content"],
-    });
-    return newBlog;
+    const blog = this.blogCache.find((blog) => blog.id === blogId);
+    if (!blog) {
+      throw new Error(`Failed to find blog data: id ${blogId}`);
+    }
+    return blog;
+  }
+
+  /**
+   *
+   * @param {number} pageNumber
+   * @returns list of BlogModels
+   */
+  async fetchPaginatedBlogPosts(pageNumber) {
+    let posts = this.blogCache;
+    if (posts.length === 0) {
+      console.log("fetched blogs");
+      const url = "/api/posts.json";
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error(`Failed to fetch blog data: status ${res.status}`);
+      }
+      const data = await res.json();
+      posts = data.map((item) => {
+        return new BlogModel({
+          id: item["id"],
+          title: item["title"],
+          subtitle: item["subtitle"],
+          slug: item["slug"],
+          dateCreated: item["dateCreated"],
+          keywords: item["tags"],
+          content: item["content"],
+        });
+      });
+
+      this.blogCache = posts;
+    }
+    const startIndex = (pageNumber - 1) * this.POSTS_PER_PAGE;
+    const endIndex = startIndex + this.POSTS_PER_PAGE;
+
+    const paginatedPosts = posts.slice(startIndex, endIndex);
+
+    return paginatedPosts;
   }
 }
 
-export default BlogApiClient;
+export default BlogRepository;

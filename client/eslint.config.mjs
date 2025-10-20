@@ -5,13 +5,13 @@ import eslintConfigPrettier from "eslint-config-prettier/flat";
 
 export default defineConfig([
   {
-    files: ["**/*.{js,mjs,cjs}"],
+    files: ["public/**/*.{js,mjs,cjs}"],
     plugins: { js },
     extends: ["js/recommended"],
     languageOptions: { globals: globals.browser },
   },
   {
-    files: ["server.js"],
+    files: ["*.js"],
     plugins: { js },
     extends: ["js/recommended"],
     languageOptions: { globals: globals.node },

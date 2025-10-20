@@ -7,7 +7,6 @@ class BlogModel {
    * @property {string} subtitle
    * @property {string} slug
    * @property {string} dateCreated
-   * @property {string} dateUpdated
    * @property {string[]} keywords
    * @property {string} content
    */
@@ -30,7 +29,6 @@ class BlogModel {
     this.subtitle = newBlog.subtitle;
     this.slug = newBlog.slug;
     this.dateCreated = newBlog.dateCreated;
-    this.dateUpdated = newBlog.dateUpdated;
     this.keywords = newBlog.keywords;
     this.content = newBlog.content;
   }

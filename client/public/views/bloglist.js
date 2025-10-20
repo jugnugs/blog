@@ -1,4 +1,3 @@
-import BlogApiClient from "../api/blog.js";
 import buildBlogCard from "../components/blog_card.js";
 
 /**
@@ -6,16 +5,8 @@ import buildBlogCard from "../components/blog_card.js";
  * Supports pagination.
  */
 class BlogList {
-  static blogApiClient = new BlogApiClient();
-
-  constructor() {
-    this.data = [];
-  }
-
-  static async createBlogList() {
-    const blogList = new BlogList();
-    blogList.data = await BlogList.blogApiClient.fetchBlogList();
-    return blogList;
+  constructor(blogList) {
+    this.data = blogList;
   }
 
   buildBlogListDOM() {

@@ -1,3 +1,4 @@
+import BlogRepository from "./api/blog.js";
 import NotFoundPage from "./pages/404.js";
 import AboutPage from "./pages/about.js";
 import BlogPage from "./pages/blogpage.js";
@@ -34,13 +35,15 @@ class App {
   }
 }
 
+const blogRepository = new BlogRepository();
+
 /**
  * Initialize all initial pages and store reference in routes.
  * @returns Object containing route objects
  */
 const buildPageRoutes = async () => {
   const routes = {};
-  const homePage = await HomePage.createHomePage();
+  const homePage = await HomePage.createHomePage(blogRepository);
   routes["/"] = { title: "blog home", page: homePage };
   routes["/about"] = { title: "about", page: new AboutPage() };
   routes["/notfound"] = { title: "404", page: new NotFoundPage() };
@@ -84,9 +87,9 @@ class Router {
       this.routeToPage(route.title, route.page);
     } else if (/^\/blog\/[a-zA-Z0-9-]+/.test(path)) {
       const subpath = path.split("/")[2];
-      const blogId = subpath.split("-")[0];
+      const blogId = parseInt(subpath.split("-")[0]);
       const slug = subpath.slice(subpath.indexOf("-") + 1);
-      BlogPage.createBlogPage(blogId).then(
+      BlogPage.createBlogPage(blogId, blogRepository).then(
         (blogPage) => {
           if (blogPage.blog.slug !== slug) {
             path = `/blog/${blogId}-${blogPage.blog.slug}`;

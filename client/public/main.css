@@ -81,6 +81,10 @@ footer {
 }
 
 @media (max-width: 1024px) {
+  body {
+    font-size: 14px;
+  }
+
   main {
     width: 80vw;
   }

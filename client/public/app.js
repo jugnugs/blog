@@ -44,8 +44,8 @@ const blogRepository = new BlogRepository();
 const buildPageRoutes = async () => {
   const routes = {};
   const homePage = await HomePage.createHomePage(blogRepository);
-  routes["/"] = { title: "blog home", page: homePage };
-  routes["/about"] = { title: "about", page: new AboutPage() };
+  routes["/"] = { title: "jugnugs's blog", page: homePage };
+  routes["/about"] = { title: "jugnugs's blog - about", page: new AboutPage() };
   routes["/notfound"] = { title: "404", page: new NotFoundPage() };
   return routes;
 };
@@ -84,7 +84,7 @@ class Router {
     let path = this.getPathFromUrl();
     const route = this.resolveRouteFromPath(path);
     if (route) {
-      if (route.title === "blog home") {
+      if (route.title === "jugnugs's blog") {
         const searchParams = new URLSearchParams(window.location.search);
         const pageValue = parseInt(searchParams.get("page"));
         if (pageValue) {

@@ -9,7 +9,7 @@ const buildPageNavigation = (currentPage, totalPageCount) => {
 
   const prevPageButton = document.createElement("a");
   prevPageButton.href = `/?page=${currentPage - 1}`;
-  prevPageButton.dataset.paginate = "";
+  prevPageButton.dataset.link = "";
   prevPageButton.textContent = "<";
   if (currentPage === 1) {
     prevPageButton.style.visibility = "hidden";
@@ -22,7 +22,7 @@ const buildPageNavigation = (currentPage, totalPageCount) => {
 
   const nextPageButton = document.createElement("a");
   nextPageButton.href = `/?page=${currentPage + 1}`;
-  nextPageButton.dataset.paginate = "";
+  nextPageButton.dataset.link = "";
   nextPageButton.textContent = ">";
   if (currentPage === totalPageCount) {
     nextPageButton.style.visibility = "hidden";

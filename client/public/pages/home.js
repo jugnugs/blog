@@ -1,3 +1,4 @@
+import buildPageNavigation from "../components/page_navigation.js";
 import BlogList from "../views/bloglist.js";
 
 class HomePage {
@@ -5,13 +6,26 @@ class HomePage {
     this.headerContents = "blog list";
     this.blogList = new BlogList();
     this.blogRepository = blogRepository;
+    this.pageNumber = 1;
+    this.totalPageCount = 1;
   }
 
   static async createHomePage(blogRepository) {
     const homePage = new HomePage(blogRepository);
-    const blogList = await homePage.blogRepository.fetchPaginatedBlogPosts(1);
-    homePage.blogList = new BlogList(blogList);
+    homePage.changePage(1);
     return homePage;
+  }
+
+  /**
+   * Page the homepage with updated blog list contents
+   * @param {number} pageNumber
+   */
+  async changePage(pageNumber) {
+    this.pageNumber = pageNumber;
+    const blogList =
+      await this.blogRepository.fetchPaginatedBlogPosts(pageNumber);
+    this.totalPageCount = this.blogRepository.getTotalPageCount();
+    this.blogList = new BlogList(blogList);
   }
 
   buildPageDOM() {
@@ -20,6 +34,10 @@ class HomePage {
     header.textContent = this.headerContents;
     container.appendChild(header);
     container.appendChild(this.blogList.buildBlogListDOM());
+
+    container.appendChild(
+      buildPageNavigation(this.pageNumber, this.totalPageCount)
+    );
     return container;
   }
 }

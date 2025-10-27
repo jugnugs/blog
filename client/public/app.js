@@ -84,6 +84,21 @@ class Router {
     let path = this.getPathFromUrl();
     const route = this.resolveRouteFromPath(path);
     if (route) {
+      if (route.title === "blog home") {
+        const searchParams = new URLSearchParams(window.location.search);
+        const pageValue = parseInt(searchParams.get("page"));
+        if (pageValue) {
+          route.page.changePage(pageValue).then(() => {
+            this.routeToPage(route.title, route.page);
+          });
+          return;
+        } else {
+          route.page.changePage(1).then(() => {
+            this.routeToPage(route.title, route.page);
+          });
+          return;
+        }
+      }
       this.routeToPage(route.title, route.page);
     } else if (/^\/blog\/[a-zA-Z0-9-]+/.test(path)) {
       const subpath = path.split("/")[2];

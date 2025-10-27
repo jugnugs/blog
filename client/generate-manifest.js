@@ -5,6 +5,7 @@ const postsArray = [];
 const blogsDir = __dirname + "/public/blogs";
 const manifestDir = __dirname + "/public/api/posts.json";
 
+console.log("[LOG]: Begin generating blog manifest file...");
 try {
   const filenames = fs.readdirSync(blogsDir);
   filenames.forEach((filename) => {
@@ -17,6 +18,8 @@ try {
   });
   const jsonString = JSON.stringify(postsArray, null, 2);
   fs.writeFileSync(manifestDir, jsonString);
+  console.log("[LOG]: Finished generating file.");
 } catch (err) {
-  console.log(err);
+  console.error("[ERR]: Error trying to generate file: ", err);
 }
+console.log("---------------------------");

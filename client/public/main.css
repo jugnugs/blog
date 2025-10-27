@@ -26,6 +26,7 @@ main {
 
 main a:link, main a:visited {
   color: var(--link-color);
+  text-decoration: none;
 }
 
 nav a:link, nav a:visited {
@@ -73,10 +74,6 @@ div, article {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-}
-
-.page-nav a {
-  text-decoration: none;
 }
 
 footer {

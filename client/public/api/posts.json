@@ -1,73 +1,14 @@
 [
   {
     "id": 1,
-    "title": "Why Blog? Why Create Anything?",
-    "subtitle": "ramblings about self-expression",
-    "dateCreated": "2025-10-17T00:00:00.000Z",
+    "title": "the blog that almost didn't get released",
+    "subtitle": "this blog would have been stuck in development limbo forever",
+    "dateCreated": "2025-10-30T00:00:00.000Z",
     "tags": [
       "writing",
       "creativity"
     ],
-    "slug": "why-blog",
-    "content": "\n## Introduction\n\nI have never tried to publicize my thoughts in any way. Partially because I believe I don't have anything important to say that I need the world to pay attention to, but maybe even more so this: _I am afraid_. There's something scary about sharing a piece of yourself you would not normally share, especially to an unknown audience that is the Internet. What will people think if I say this? Maybe I have the wrong opinion about this to begin with, I need to be careful before I post anything. What can I do to convey this in the cleanest way possible to **_avoid conflict and confusion_**?\n\nIt's an impossible goal. I cannot predict who will see and read my words. I can't predict how they will feel and react to those words. No matter how much I can try to control the output, it will never please everyone. That's just how it works. So I write for myself, and maybe a small audience that can resonate, but I don't have high expectations that anyone can. Not because I think I am special, but I want to free myself from the concept of expectations to begin with: what I feel and write is what I feel and write, that's it. It's by being able to do this that I am able to get a grasp, if only a small sliver, of the individual that is me.\n"
-  },
-  {
-    "id": 2,
-    "title": "Cooking for Life",
-    "subtitle": "ramblings about the role of food and cooking in my life",
-    "dateCreated": "2025-10-20T00:00:00.000Z",
-    "tags": [
-      "cooking"
-    ],
-    "slug": "cooking-life",
-    "content": "\n## A Food Journey\n\nI started cooking at home way more frequently as a way to reduce spending on food. Some days, especially at the beginning of that journey, I felt excited thinking about new dishes to try making. Other days, I found the very idea of cutting up ingredients exhausting. Motivation is variable, so my motivation to cook is variable too. But no matter what, the necessity to eat something is always present.\n"
-  },
-  {
-    "id": 3,
-    "title": "What is a Successful Life?",
-    "subtitle": "and is that even the right question?",
-    "dateCreated": "2025-10-22T00:00:00.000Z",
-    "tags": [
-      "life",
-      "purpose"
-    ],
-    "slug": "successful-life",
-    "content": "\n## The Definition of Success\n"
-  },
-  {
-    "id": 4,
-    "title": "Programming an SPA with pure JS",
-    "subtitle": "going back to the foundations",
-    "dateCreated": "2025-10-25T00:00:00.000Z",
-    "tags": [
-      "programming",
-      "webdev",
-      "frontend"
-    ],
-    "slug": "spa-purejs",
-    "content": "\n## Introduction\n\nInstead of writing JSX in **React**, I challenged myself to write a bunch of this:\n\n```javascript\nconst selector = document.createElement(\"div\");\n```\n"
-  },
-  {
-    "id": 5,
-    "title": "Do we need a Life Purpose?",
-    "subtitle": "is it overrated?",
-    "dateCreated": "2025-10-27T00:00:00.000Z",
-    "tags": [
-      "life",
-      "purpose"
-    ],
-    "slug": "life-purpose",
-    "content": "\n## The Futility about thinking about Purpose\n"
-  },
-  {
-    "id": 6,
-    "title": "My Relationship with Money",
-    "subtitle": "the most central necessary evil?",
-    "dateCreated": "2025-10-31T00:00:00.000Z",
-    "tags": [
-      "money"
-    ],
-    "slug": "relationship-money",
-    "content": "\n## Money: More about the Immaterial than the Material\n"
+    "slug": "first-blog",
+    "content": "\nThis is my first time writing a personal blog. I've written things to the internet anonymously before, but it never felt so personal. The more personal it feels, the more uncomfortable I get. It's almost like it's attached to my identity. What I put out there is what people will think of me.\n\nI think it's true to an extent; other people can only see so much of the iceberg that is a person, so whatever words you say or behaviors you take become your defining traits. I don't think that is what is making me uncomfortable though. I think it's the fact that I will be exposing more and more of that iceberg as I write more. Only now that I am attempting to share more of myself do I realize that there is a lot I am afraid to share. I guess this is what you would call vulnerability, correct?\n\nIf it were not for my determination to get this blog released no matter how anxious I feel when thinking about what people will think about my words or the hacked-together simple code this website was built with, and no matter how meaningless it feels to post something to the internet in this day and age where everything is being drowned out by the deluge of other content, this blog would not have been released. I have been working on it for over a month now. It's a very simple single-page application. Coding it in pure Javascript with minimal dependencies was fun and educational. But I don't think the actual idea of _publishing_ it to the world sunk it until my mouse was hovering over the `Make public` button in GitHub.\n\nBut here we are. This is the first blog post.\n\n## the purpose of this site\n\nThis blog is for me. I wanted a creative outlet for free thought and expression. But I wasn't satisfied with journaling some private for myself. I felt like I needed to get used to outputting to other people and get over that fear of vulnerability. I felt like if I didn't do that, I would feel more alone and isolated.\n\nSo this is a thoughts dump page, rather than a blog. Calling it a blog sounds too fancy, too polished. Thoughts dump sounds more appropriate. More comfortable. Whatever it takes to get those thoughts out there.\n\n## ground rules (for myself)\n\n1. Minimal editing. Force yourself not to go back and edit your words as much. Typo fixes are fine but too much editing is counter to the goal. Fight against perfectionism.\n2. No AI writing assistance.\n3. Write whatever comes to mind as often as you can.\n\n## it's finally done\n\nNow I can go work on another project. Recently I've been into cooking and meal planning, so something along those lines. I will make posts about those updates when they come out.\n"
   }
 ]

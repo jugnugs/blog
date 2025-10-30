@@ -3,7 +3,7 @@ import BlogList from "../views/bloglist.js";
 
 class HomePage {
   constructor(blogRepository) {
-    this.headerContents = "blog list";
+    this.headerContents = "archive";
     this.blogList = new BlogList();
     this.blogRepository = blogRepository;
     this.pageNumber = 1;

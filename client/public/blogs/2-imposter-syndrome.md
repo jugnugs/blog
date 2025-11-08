@@ -2,7 +2,7 @@
 id: 2
 title: ramblings about finding purpose as a coward
 subtitle: going forward despite fear and doubt, by talking about attack on titan
-dateCreated: 2025-11-8
+dateCreated: 2025-11-08
 tags:
   - imposter syndrome
   - purpose
